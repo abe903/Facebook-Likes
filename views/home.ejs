@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div>
+        <div>
+            <h2> Hello <%= name %></h2>
+        </div>
+    </div>
+    <a href="/login" class="btn btn-sm btn-primary">Login</a><br/><br/>
+    <a href="/register" class="btn btn-sm btn-primary">Register</a><br/><br/>
+    <div class="container-right">
+        <h2> Enter Event </h2>
+        <form action="/blogpost/<%= userid %>" method="post">
+        <div class="form-group">
+            <label for="blogpost">Enter Blog</label>:</label>
+            <input type="blogpost" class="form-control" id="blogpost" placeholder="Enter Blog" name="blogpost" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Blog Posts</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach(function(blog){ %>
+                <tr>
+                    <td><%= blog.post %></td>
+                    <td><%= blog.users %></td>
+                    <td>
+                        <form action="/addlike/<%= userid %>/foruser/<%= blog.id %>" method="post">
+                            <button type="submit" class="btn btn-primary">Like</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+  </body>
+</html>
