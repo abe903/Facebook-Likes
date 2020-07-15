@@ -40,7 +40,6 @@ app.get('/home',(req, res) => {
     let userid = req.session.idnumber;
     let sql = "SELECT app.blogs_users.blogID, app.blogs.post,app.blogs.id, COUNT(*) AS 'users' FROM app.blogs_users JOIN app.blogs ON app.blogs_users.blogID = app.blogs.id GROUP BY app.blogs_users.blogID";
     connection.query(sql, (err, results) => {
-      console.log(results);
       if(err) throw err;
       res.render('home', {
         posts: results,
@@ -73,7 +72,6 @@ app.post('/signin', (req, res) => {
     let sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
     connection.query(sql,[username, password],(err, results) => {
       if(err) throw err;
-      console.log(results);
       req.session.idnumber = results[0].id
       req.session.username = results[0].username
       res.redirect('/home');
@@ -91,7 +89,6 @@ app.post('/blogpost/:id', (req, res) => {
 
 app.post('/addlike/:userid/foruser/:blogid', (req, res) => {
     let data = { userID: req.params.userid, blogID: req.params.blogid};
-    console.log(data);
     let sql = "INSERT INTO blogs_users SET ?";
     connection.query(sql, data,(err) => {
       if(err) throw err;
