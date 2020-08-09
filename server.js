@@ -38,7 +38,13 @@ app.listen(3000, () => {
 app.get('/home',(req, res) => {
     let name = req.session.username;
     let userid = req.session.idnumber;
-    let sql = "SELECT app.blogs_users.blogID, app.blogs.post,app.blogs.id, COUNT(*) AS 'users' FROM app.blogs_users JOIN app.blogs ON app.blogs_users.blogID = app.blogs.id GROUP BY app.blogs_users.blogID";
+    
+    let sql = "SELECT app.blogs_users.blogID, 
+              app.blogs.post,app.blogs.id, 
+              COUNT(*) AS 'users' FROM app.blogs_users 
+              JOIN app.blogs ON app.blogs_users.blogID = app.blogs.id 
+              GROUP BY app.blogs_users.blogID";
+    
     connection.query(sql, (err, results) => {
       if(err) throw err;
       res.render('home', {
