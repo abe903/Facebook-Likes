@@ -1,4 +1,4 @@
-## Facebook "Likes" feature. Javascript + Express + SQL
+### Facebook "Likes" feature. Javascript + Express + SQL
 
 
 ### `npm install`
